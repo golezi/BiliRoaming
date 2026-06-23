@@ -77,6 +77,9 @@ class JsonHook(classLoader: ClassLoader) : BaseHook(classLoader) {
         val liveShoppingGotoBuyInfoClass =
             "com.bilibili.bililive.room.biz.shopping.beans.LiveShoppingGotoBuyInfo"
                 .from(mClassLoader)
+        val liveNoticeClass =
+            "com.bilibili.bililive.videoliveplayer.net.beans.gateway.userinfo.LiveNotice"
+                .from(mClassLoader)
         val shareChannelsClass = "com.bilibili.lib.sharewrapper.online.api.ShareChannels"
             .from(mClassLoader)
         val channelItemClass = "com.bilibili.lib.sharewrapper.online.api.ShareChannels\$ChannelItem"
@@ -469,6 +472,11 @@ class JsonHook(classLoader: ClassLoader) : BaseHook(classLoader) {
 
                 liveShoppingGotoBuyInfoClass -> {
                     if (hidden && purifyLivePopups.contains("gotoBuy"))
+                        param.result = null
+                }
+
+                liveNoticeClass -> {
+                    if (hidden && purifyLivePopups.contains("banner"))
                         param.result = null
                 }
             }
