@@ -418,6 +418,14 @@ class JsonHook(classLoader: ClassLoader) : BaseHook(classLoader) {
             if (result.javaClass == instance.generalResponseClass)
                 result = result.getObjectField("data") ?: return@hookAfterMethod
 
+            val className = result.javaClass.name
+            val jsonContent = runCatching {
+                // 假设 instance.fastJsonClass 就是 com.alibaba.fastjson.JSON
+                val toJSONStringMethod = instance.fastJsonClass?.getMethod("toJSONString", Any::class.java)
+                toJSONStringMethod?.invoke(null, result) as? String
+            }.getOrNull() ?: "【序列化失败，转为toString】: $result"
+            Log.d("Target Class: $className | Content: $jsonContent")
+            
             when (result.javaClass) {
                 liveShoppingInfoClass -> {
                     if (hidden && purifyLivePopups.contains("shoppingCard")) {
