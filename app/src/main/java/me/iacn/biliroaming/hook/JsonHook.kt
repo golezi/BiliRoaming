@@ -78,7 +78,7 @@ class JsonHook(classLoader: ClassLoader) : BaseHook(classLoader) {
             "com.bilibili.bililive.room.biz.shopping.beans.LiveShoppingGotoBuyInfo"
                 .from(mClassLoader)
         val biligameApiResponseClass =
-            "com.bilibili.biligame.api.BiligameApiResponse".findClassOrNull(mClassLoader)
+            "com.bilibili.biligame.api.BiligameApiResponse".from(mClassLoader)
         val liveNoticeClass =
             "com.bilibili.bililive.videoliveplayer.net.beans.gateway.userinfo.LiveNotice"
                 .from(mClassLoader)
