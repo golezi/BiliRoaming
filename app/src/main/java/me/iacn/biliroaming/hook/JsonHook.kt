@@ -498,10 +498,9 @@ class JsonHook(classLoader: ClassLoader) : BaseHook(classLoader) {
                 }
 
                 biligameApiResponseClass -> {
+                    Log.d("biligameApiResponseClass")
                     if (hidden && purifyLivePopups.contains("game")) {
-                        val data = result.getObjectFieldOrNull("data") ?: return@hookAfterMethod
-                        if (data.getObjectFieldOrNull("android_pkg_name") != null)
-                            param.result = null
+                         param.result = null
                     }
                 }
             }
