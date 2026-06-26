@@ -32,7 +32,6 @@ jobs:
           key: ${{ runner.os }}-${{ github.sha }}
           restore-keys: ${{ runner.os }}
       - name: Write key
-        if: ${{ ( github.event_name != 'pull_request' && github.ref == 'refs/heads/master' ) || github.ref_type == 'tag' }}
         run: |
           if [ ! -z "${{ secrets.SIGNING_KEY }}" ]; then
             echo 'Writing sign key'
