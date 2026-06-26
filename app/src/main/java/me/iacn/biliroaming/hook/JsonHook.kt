@@ -77,6 +77,8 @@ class JsonHook(classLoader: ClassLoader) : BaseHook(classLoader) {
         val liveShoppingGotoBuyInfoClass =
             "com.bilibili.bililive.room.biz.shopping.beans.LiveShoppingGotoBuyInfo"
                 .from(mClassLoader)
+        val biligameApiResponseClass =
+            "com.bilibili.biligame.api.BiligameApiResponse".findClassOrNull(mClassLoader)
         val liveNoticeClass =
             "com.bilibili.bililive.videoliveplayer.net.beans.gateway.userinfo.LiveNotice"
                 .from(mClassLoader)
@@ -493,6 +495,14 @@ class JsonHook(classLoader: ClassLoader) : BaseHook(classLoader) {
                 liveNoticeClass -> {
                     if (hidden && purifyLivePopups.contains("banner"))
                         param.result = null
+                }
+
+                biligameApiResponseClass -> {
+                    if (hidden && purifyLivePopups.contains("game")) {
+                        val data = result.getObjectFieldOrNull("data") ?: return@hookAfterMethod
+                        if (data.getObjectFieldOrNull("android_pkg_name") != null)
+                            param.result = null
+                    }
                 }
             }
         }
