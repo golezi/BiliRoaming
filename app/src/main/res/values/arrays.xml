@@ -230,7 +230,7 @@
         <item>滚动横幅</item>
         <item>电池任务</item>
         <item>正在去买</item>
-        <item>正在去买</item>
+        <item>游戏卡片</item>
     </string-array>
     <string-array name="live_popup_values">
         <item>shoppingCard</item>
